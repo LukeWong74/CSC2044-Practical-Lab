@@ -17,7 +17,7 @@ public class GenerateNumbers implements Runnable {
 				synchronized (array) {
 					while (array.size() == 5) {
 						try {
-							System.out.println("Waiting for T1");
+							System.out.println("T1 is Waiting");
 							array.wait();
 						} catch (InterruptedException e) {
 							e.printStackTrace();
