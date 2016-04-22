@@ -4,8 +4,6 @@ import java.util.Queue;
 public class GenerateNumbers implements Runnable {
 	Queue<Integer> array;
 	Random rdm = new Random();
-	TakingNumbers takeNum;
-	boolean ready = true;
 
 	public GenerateNumbers(Queue<Integer> array) {
 		this.array = array;
@@ -15,10 +13,9 @@ public class GenerateNumbers implements Runnable {
 		while (true) {
 			for (int x = 0; x < 5; x++) {
 				int rdmNum = 1 + rdm.nextInt(100);
-				
-				synchronized (array) {
 
-					while (!array.isEmpty()) {
+				synchronized (array) {
+					while (array.size() == 5) {
 						try {
 							System.out.println("Waiting for T1");
 							array.wait();
