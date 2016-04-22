@@ -15,7 +15,7 @@ public class TakingNumbers implements Runnable {
 				while (array.isEmpty()) {
 					System.out.println("Queue is empty");
 					try {
-						System.out.println("Waiting for T2");
+						System.out.println("T2 is Waiting");
 						array.wait();
 					} catch (InterruptedException e) {
 						e.printStackTrace();
