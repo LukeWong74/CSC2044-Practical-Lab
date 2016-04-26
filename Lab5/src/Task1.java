@@ -4,9 +4,11 @@ public class Task1 implements Runnable {
 	double[] array;
 	Random rdm = new Random();
 	double minimumValue = Double.MAX_VALUE;
+	int length;
 
-	public Task1(double[] array) {
+	public Task1(double[] array, int length) {
 		this.array = array;
+		this.length = length;
 	}
 
 	@Override
@@ -27,14 +29,6 @@ public class Task1 implements Runnable {
 			if (result < minimumValue)
 				minimumValue = result;
 		}
-		setMinimumValue(minimumValue);
-	}
-
-	public void setMinimumValue(double minimum) {
-		minimumValue = minimum;
-	}
-
-	public double getMinimumValue() {
-		return minimumValue;
+		Main.minArray[length] = minimumValue;
 	}
 }
