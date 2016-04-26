@@ -1,11 +1,14 @@
 import java.util.Random;
 
 public class Main {
+	static double minimum = Double.MAX_VALUE;
+	static double[] minArray = new double[200];
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		double[][] array_200 = new double[200][100];
 		double[][] array_20 = new double[200][100];
+
 		Thread[] threadArray = new Thread[200];
 		Random rdm = new Random();
 		long start_time;
@@ -17,34 +20,35 @@ public class Main {
 				double initialMin = -5.12;
 				double initialMax = 5.12;
 
-				array_200[x][y] = initialMin
+				double value = initialMin
 						+ (rdm.nextDouble() * (initialMax - initialMin));
-				array_20[x][y] = initialMin
-						+ (rdm.nextDouble() * (initialMax - initialMin));
+
+				array_200[x][y] = value;
+				array_20[x][y] = value;
 			}
 		}
 
 		// 200 threads
 		// start time
 		start_time = System.currentTimeMillis();
-		double minimum = Double.MAX_VALUE;
 
 		for (int x = 0; x < 200; x++) {
-			Task1 task1 = new Task1(array_200[x]);
+			Task1 task1 = new Task1(array_200[x], x);
 
 			threadArray[x] = new Thread(task1);
-
 			threadArray[x].start();
+		}
 
+		for (int x = 0; x < 200; x++) {
 			try {
 				threadArray[x].join();
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
-			minimum = task1.getMinimumValue();
 		}
+
+		findMinimum(minArray);
 
 		// end time
 		end_time = System.currentTimeMillis();
@@ -58,21 +62,22 @@ public class Main {
 		start_time = System.currentTimeMillis();
 
 		for (int x = 0; x < 20; x++) {
-			Task1 task2 = new Task1(array_20[x]);
+			Task1 task2 = new Task1(array_20[x], x);
 
 			threadArray[x] = new Thread(task2);
-
 			threadArray[x].start();
+		}
 
+		for (int x = 0; x < 200; x++) {
 			try {
 				threadArray[x].join();
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
-			minimum = task2.getMinimumValue();
 		}
+
+		findMinimum(minArray);
 
 		// end time
 		end_time = System.currentTimeMillis();
@@ -82,4 +87,10 @@ public class Main {
 				end_time - start_time, minimum);
 	}
 
+	public static void findMinimum(double[] minArray) {
+		for (int x = 0; x < 200; x++) {
+			if (minArray[x] < minimum)
+				minimum = minArray[x];
+		}
+	}
 }
