@@ -20,7 +20,10 @@ public class Task1 implements Runnable {
 			for (int y = 0; y < 100; y++) {
 				result += (array[y] * array[y]) * y;
 
-				double value = -0.5 + rdm.nextDouble() * 0.5;
+				double initialMin = -0.5;
+				double initialMax = 0.5;
+				double value = initialMin + rdm.nextDouble()
+						* (initialMax - initialMin);
 
 				if (array[y] + value > -5.12 && array[y] + value < 5.12)
 					array[y] += value;
