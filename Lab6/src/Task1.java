@@ -29,8 +29,7 @@ public class Task1 implements Runnable {
 
 				passArray(tempArray, array);
 			} else {
-				for (int z = 0; z < 100; z++)
-					passArray(array, tempArray);
+				passArray(array, tempArray);
 			}
 
 			for (int b = 0; b < 100; b++) {
