@@ -21,8 +21,8 @@ public class Main {
 				double initialMin = -5.12;
 				double initialMax = 5.12;
 
-				double value = initialMin
-						+ (rdm.nextDouble() * (initialMax - initialMin));
+				double value = initialMin + rdm.nextDouble()
+						* (initialMax - initialMin);
 
 				array_200[x][y] = value;
 			}
@@ -52,9 +52,9 @@ public class Main {
 		// end time
 		end_time = System.currentTimeMillis();
 
-		System.out.printf(
-				"Total time for 200 threads with Hill Climber: %d\nThe minimum value: %.2f\n\n",
-				end_time - start_time, minimum);
+		System.out
+				.printf("Total time for 200 threads with Hill Climber: %d\nThe minimum value: %.2f\n\n",
+						end_time - start_time, minimum);
 	}
 
 	public static void findMinimum(double[] minArray) {
