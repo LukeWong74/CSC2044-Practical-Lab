@@ -43,8 +43,12 @@ public class Task1 implements Callable<Double> {
 				if (array[b] + value > -5.12 && array[b] + value < 5.12)
 					array[b] += value;
 			}
+
+			if (x % 20 == 0) {
+				System.out.printf("Thread %s - Current Minimum Value: %f\n",
+						length, minimumValue);
+			}
 		}
-		Main.minArray[length] = minimumValue;
 
 		return minimumValue;
 	}
