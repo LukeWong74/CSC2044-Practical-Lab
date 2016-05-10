@@ -5,7 +5,6 @@ import java.util.concurrent.*;
 
 public class Main {
 	static double minimum = Double.MAX_VALUE;
-	static double[] minArray = new double[200];
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -38,19 +37,24 @@ public class Main {
 			Task1 task1 = new Task1(array_200[x], x);
 
 			Future<Double> future = exec.submit(task1);
-
 			futureList.add(future);
 		}
 
 		for (Future<Double> futureget : futureList) {
+			double min = 0;
+
 			try {
-				System.out.printf("Current Min Value: %f\n", futureget.get());
+				min = futureget.get();
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (ExecutionException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			}
+
+			if (min < minimum) {
+				minimum = min;
 			}
 		}
 
@@ -63,20 +67,11 @@ public class Main {
 			e.printStackTrace();
 		}
 
-		findMinimum(minArray);
-
 		// end time
 		end_time = System.currentTimeMillis();
 
 		System.out
 				.printf("\nTotal time for 200 threads with Hill Climber: %d\nThe minimum value: %.2f\n\n",
 						end_time - start_time, minimum);
-	}
-
-	public static void findMinimum(double[] minArray) {
-		for (int x = 0; x < 200; x++) {
-			if (minArray[x] < minimum)
-				minimum = minArray[x];
-		}
 	}
 }
