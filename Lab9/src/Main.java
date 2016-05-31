@@ -12,7 +12,7 @@ public class Main {
 		Thread t2 = new Thread(d2);
 		Thread t3 = new Thread(w1);
 		
-		System.out.println("Initial Balance: " + b1.balance());
+		System.out.println("Initial Balance: $" + b1.balance());
 		
 		t1.start();
 		t2.start();
